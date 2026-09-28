@@ -51,4 +51,22 @@ class LinkedList {
     size() {
         return this.#size;
     }
+
+    // Should return the value of the first node in the list. 
+    // If the list is empty, it should return undefined.
+    head() {
+        if (this.size() > 0) {
+            return this.#head.value;
+        }
+        return undefined;
+    }
+
+    // Should return the value of the final node in the list.
+    // If the list is empty, it should return undefined.
+    tail() {
+        if (this.size() > 0) {
+            return this.#tail.value;
+        }
+        return undefined;
+    }
 }
