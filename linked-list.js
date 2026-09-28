@@ -164,10 +164,10 @@ class LinkedList {
             throw new RangeError("Index must be between 0 and list size.");
         }
 
-        let i = 0;
         let currentNode = this.#head;
         let before = undefined;
-        while(i < index) {
+        let i = 0;
+        while (i < index) {
             before = currentNode;
             currentNode = currentNode.nextNode;
             i++;
@@ -178,16 +178,22 @@ class LinkedList {
         for (let j = 0; j < values.length; j++) {
             middle.value = values[j];
             if (j === 0) {
+                // If this is the first new node added, and there exists nodes prior to this node in the list,
+                // point the previous node to the first new node.
                 if (before) {
                     before.nextNode = middle;
+                // Otherwise, the first new node added is the new head of the list.
                 } else {
                     this.#head = middle;
                 }
             }
             if (j === values.length - 1) {
+                // If this is the final new node added, and there exists nodes after this node in the list,
+                // point the final new node to the first node after it.
                 if (after) {
                     middle.nextNode = after;
                     continue;
+                // Otherwise, the final new node added is the new tail of the list.
                 } else {
                     this.#tail = middle;
                     continue;
@@ -198,5 +204,39 @@ class LinkedList {
             middle = middle.nextNode;
         }
         this.#size += values.length;
+    }
+
+    // Removes the node at the given index.
+    removeAt(index) {
+        if (index < 0 || index >= this.size()) {
+            throw new RangeError("Index must be between 0 and list size minus 1.");
+        }
+
+        let currentNode = this.#head;
+        let before = undefined;
+        let i = 0;
+        while (i < index) {
+            before = currentNode;
+            currentNode = currentNode.nextNode;
+            i++;
+        }
+        const after = currentNode.nextNode;
+
+        // If there is a node present before the node to remove,
+        // then it should now point to the node after the node to remove.
+        if (before) {
+            before.nextNode = after;
+        // Otherwise, the node to remove is the existing head,
+        // and the head must be updated to the next node.
+        } else {
+            this.#head = this.#head.nextNode;
+        }
+        // If there are nodes present after the node to remove,
+        // then the tail must be updated to the node before the node to remove.
+        if (!after) {
+            this.#tail = before;
+        }
+
+        this.#size--;
     }
 }
