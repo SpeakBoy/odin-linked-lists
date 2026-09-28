@@ -75,6 +75,7 @@ class LinkedList {
     at(index) {
         let i = 0;
         let currentNode = this.#head;
+        // Search through each element of the list until the current index equals the search index.
         while (currentNode) {
             if (i === index) {
                 return currentNode.value;
@@ -83,5 +84,28 @@ class LinkedList {
             i++;
         }
         return undefined;
+    }
+
+    // Should remove the head node from the list and return its value.
+    // If it's used on an empty list, it should return undefined.
+    pop() {
+        if (this.size() === 0) {
+            return undefined;
+        }
+
+        // Store the value of the head (to be popped).
+        const poppedValue = this.#head.value;
+
+        // The element the head is pointing to becomes the new head
+        this.#head = this.#head.nextNode;
+        this.#size--;
+
+        // If the list becomes empty,
+        // then the tail no longer exists and is updated accordingly.
+        if (this.size() === 0) {
+            this.#tail = undefined;
+        }
+
+        return poppedValue;
     }
 }
