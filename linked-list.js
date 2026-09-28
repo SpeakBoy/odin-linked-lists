@@ -157,4 +157,46 @@ class LinkedList {
         listString += "null";
         return listString;
     }
+
+    // Should insert new nodes with the given values at the given index.
+    insertAt(index, ...values) {
+        if (index < 0 || index > this.size()) {
+            throw new RangeError("Index must be between 0 and list size.");
+        }
+
+        let i = 0;
+        let currentNode = this.#head;
+        let before = undefined;
+        while(i < index) {
+            before = currentNode;
+            currentNode = currentNode.nextNode;
+            i++;
+        }
+        const after = currentNode;
+
+        let middle = new ListNode();
+        for (let j = 0; j < values.length; j++) {
+            middle.value = values[j];
+            if (j === 0) {
+                if (before) {
+                    before.nextNode = middle;
+                } else {
+                    this.#head = middle;
+                }
+            }
+            if (j === values.length - 1) {
+                if (after) {
+                    middle.nextNode = after;
+                    continue;
+                } else {
+                    this.#tail = middle;
+                    continue;
+                }
+                
+            }
+            middle.nextNode = new ListNode();
+            middle = middle.nextNode;
+        }
+        this.#size += values.length;
+    }
 }
