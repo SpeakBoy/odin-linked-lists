@@ -1,7 +1,29 @@
+const { default: ListNode } = await import("./node.js");
+
 class LinkedList {
     constructor() {
         this.head = undefined;
         this.tail = undefined;
         this.size = 0;
+    }
+
+    append(value) {
+        const newNode = new ListNode();
+        newNode.value = value;
+
+        // If the list is empty, the new node is the head.  
+        if (this.size === 0) {
+            this.head = newNode;
+        }
+        
+        // If a tail exists, then the existing tail should point to the new node.
+        if (this.tail) {
+            this.tail.nextNode = newNode;
+        }
+
+        // The new node becomes the tail.
+        this.tail = newNode;
+
+        this.size++;
     }
 }
