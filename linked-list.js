@@ -1,49 +1,54 @@
 const { default: ListNode } = await import("./node.js");
 
 class LinkedList {
-    constructor() {
-        this.head = undefined;
-        this.tail = undefined;
-        this.size = 0;
-    }
+    #head = undefined;
+    #tail = undefined;
+    #size = 0;
 
+    // Adds a new node containing value to the end of the list
     append(value) {
         const newNode = new ListNode();
         newNode.value = value;
 
         // If the list is empty, the new node is the head.  
-        if (this.size === 0) {
-            this.head = newNode;
+        if (this.size() === 0) {
+            this.#head = newNode;
         }
         
         // If a tail exists, then the existing tail should point to the new node.
-        if (this.tail) {
-            this.tail.nextNode = newNode;
+        if (this.#tail) {
+            this.#tail.nextNode = newNode;
         }
 
         // The new node becomes the tail.
-        this.tail = newNode;
+        this.#tail = newNode;
 
-        this.size++;
+        this.#size++;
     }
 
+    // Adds a new node containing value to the start of the list.
     prepend(value) {
         const newNode = new ListNode();
         newNode.value = value;
 
         // If the list is empty, the new node is the tail.
-        if (this.size === 0) {
-            this.tail = newNode;
+        if (this.size() === 0) {
+            this.#tail = newNode;
         }
 
         // If a head exists, then the new node should point to the existing head.
-        if (this.head) {
-            newNode.nextNode = this.head;
+        if (this.#head) {
+            newNode.nextNode = this.#head;
         }
 
         // The node becomes the head.
-        this.head = newNode;
+        this.#head = newNode;
 
-        this.size++;
+        this.#size++;
+    }
+
+    // Returns the total number of nodes in the list.
+    size() {
+        return this.#size;
     }
 }
