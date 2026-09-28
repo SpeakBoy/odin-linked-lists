@@ -69,4 +69,19 @@ class LinkedList {
         }
         return undefined;
     }
+
+    // Should return the value at the given index. 
+    // If there is no node at the given index, it should return undefined.
+    at(index) {
+        let i = 0;
+        let currentNode = this.#head;
+        while (currentNode) {
+            if (i === index) {
+                return currentNode.value;
+            }
+            currentNode = currentNode.nextNode;
+            i++;
+        }
+        return undefined;
+    }
 }
