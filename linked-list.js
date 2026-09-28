@@ -240,3 +240,5 @@ class LinkedList {
         this.#size--;
     }
 }
+
+export default LinkedList;
