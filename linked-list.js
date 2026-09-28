@@ -26,4 +26,24 @@ class LinkedList {
 
         this.size++;
     }
+
+    prepend(value) {
+        const newNode = new ListNode();
+        newNode.value = value;
+
+        // If the list is empty, the new node is the tail.
+        if (this.size === 0) {
+            this.tail = newNode;
+        }
+
+        // If a head exists, then the new node should point to the existing head.
+        if (this.head) {
+            newNode.nextNode = this.head;
+        }
+
+        // The node becomes the head.
+        this.head = newNode;
+
+        this.size++;
+    }
 }
