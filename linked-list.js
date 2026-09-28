@@ -138,4 +138,23 @@ class LinkedList {
         }
         return -1;
     }
+
+    // Represents LinkedList objects as strings,
+    // so you can print them out and preview them in the console.
+    // If the list is empty, it should return an empty string.
+    toString() {
+        if (this.size() === 0) {
+            return "";
+        }
+
+        let listString = "";
+        let currentNode = this.#head;
+        while (currentNode) {
+            listString += `( ${currentNode.value} ) -> `;
+            currentNode = currentNode.nextNode;
+        }
+
+        listString += "null";
+        return listString;
+    }
 }
