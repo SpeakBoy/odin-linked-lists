@@ -108,4 +108,17 @@ class LinkedList {
 
         return poppedValue;
     }
+
+    // Returns true if the passed value is in the list 
+    // and otherwise returns false.
+    contains(value) {
+        let currentNode = this.#head;
+        while (currentNode) {
+            if (currentNode.value === value) {
+                return true;
+            }
+            currentNode = currentNode.nextNode;
+        }
+        return false;
+    }
 }
